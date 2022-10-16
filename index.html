@@ -5,7 +5,6 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>Leviathan | Pokedex</title>
-      <link rel="stylesheet" href="assets/css/style.css" />
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
       <link
@@ -13,8 +12,9 @@
          rel="stylesheet"
       />
       <link rel="Icon" href="assets/img/pokeball.png" />
+      <script src="https://cdn.tailwindcss.com"></script>
    </head>
-   <body class="bg-slate-100">
+   <body class="bg-slate-100" style="font-family: poppins">
       <nav
          class="h-14 w-full bg-white shadow-sm flex items-center p-5 fixed z-20"
       >
@@ -36,33 +36,9 @@
             ></div>
          </div>
          <div
-            class="container w-[95%] m-auto relative z-10 gap-y-20 flex flex-wrap items-center justify-center gap-x-5"
+            class="container w-[95%] m-auto relative z-10 gap-y-14 flex flex-wrap items-center justify-center gap-x-5"
             id="card-container"
-         >
-            <div
-               class="w-[80%] sm:w-[30%] min-h-[150px] bg-white rounded-xl shadow-md shadow-slate-300/50 flex flex-col items-center pb-5 px-2"
-            >
-               <img
-                  src="assets/img/eeve.png"
-                  alt=""
-                  class="w-28 h-28 sm:w-32 md:w-40 sm:h-w-32 md:h-40 -mt-14"
-               />
-               <h2 class="text-sm mt-5 font-medium text-slate-500">No 01</h2>
-               <h1 class="text-lg mt-1 font-semibold text-slate-700">Eevee</h1>
-               <div class="flex gap-3 justify-center mt-3">
-                  <div
-                     class="bg-orange-300 text-white text-xs px-3 py-2 rounded-md"
-                  >
-                     Normal
-                  </div>
-                  <div
-                     class="bg-orange-300 text-white text-xs px-3 py-2 rounded-md"
-                  >
-                     Normal
-                  </div>
-               </div>
-            </div>
-         </div>
+         ></div>
       </main>
       <script src="assets/js/script.js"></script>
    </body>

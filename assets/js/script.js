@@ -1,2 +1,101 @@
 const cardContainer = document.getElementById("card-container");
-console.log(cardContainer);
+
+window.addEventListener("load", function () {
+   const total = 420;
+   for (let i = 387; i < total; i++) {
+      getPokemon(i);
+   }
+});
+
+function getPokemon(id) {
+   const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+   fetch(url)
+      .then((response) => response.json())
+      .then((data) => generatePokemon(data));
+}
+
+function generatePokemon(data) {
+   const pokeName = data.name;
+   const pokeID = data.id;
+   const pokeType = data.types;
+   const pokeImg =
+      data.sprites.versions["generation-v"]["black-white"].animated
+         .front_default;
+   const card = makePokemon(pokeID, pokeName, pokeImg);
+   cardContainer.innerHTML += card;
+   makeType(pokeType, pokeID);
+   const types = document.querySelectorAll(`.type${pokeID}`);
+   types.forEach((type) => {
+      styleCard(type);
+   });
+}
+
+function styleCard(type) {
+   type.innerHTML == "water"
+      ? type.classList.add("bg-blue-400")
+      : type.innerHTML == "fire"
+      ? type.classList.add("bg-red-500")
+      : type.innerHTML == "grass"
+      ? type.classList.add("bg-green-400")
+      : type.innerHTML == "ground"
+      ? type.classList.add("bg-stone-500")
+      : type.innerHTML == "bug"
+      ? type.classList.add("bg-green-600")
+      : type.innerHTML == "normal"
+      ? type.classList.add("bg-slate-400")
+      : type.innerHTML == "dragon"
+      ? type.classList.add("bg-indigo-600")
+      : type.innerHTML == "electric"
+      ? type.classList.add("bg-yellow-500")
+      : type.innerHTML == "fairy"
+      ? type.classList.add("bg-pink-500")
+      : type.innerHTML == "fighting"
+      ? type.classList.add("bg-violet-700")
+      : type.innerHTML == "flying"
+      ? type.classList.add("bg-stone-500")
+      : type.innerHTML == "ghost"
+      ? type.classList.add("bg-slate-500")
+      : type.innerHTML == "ice"
+      ? type.classList.add("bg-cyan-200")
+      : type.innerHTML == "poison"
+      ? type.classList.add("bg-indigo-400")
+      : type.innerHTML == "psychic"
+      ? type.classList.add("bg-indigo-500")
+      : type.innerHTML == "rock"
+      ? type.classList.add("bg-stone-700")
+      : type.classList.add("bg-slate-700");
+}
+
+function makeType(type, id) {
+   const types = document.querySelector(`#type${id}`);
+   type.forEach((element) => {
+      const span = document.createElement("span");
+      span.classList.add(
+         "rounded-md",
+         "text-white",
+         "px-3",
+         "py-[1px]",
+         `type${id}`
+      );
+      span.innerHTML = element.type.name;
+      types.appendChild(span);
+   });
+}
+function makePokemon(id, name, img) {
+   return `<div
+               class="w-[80%] sm:w-[25%] h-[200px] md:h-[250px] bg-white rounded-3xl shadow-md shadow-slate-300/50 flex flex-col items-center pb-10 px-2"
+            >
+               <img
+                  src=${img}
+                  alt=""
+                  class="w-16 h-16 sm:w-20 sm:h-20 -mt-12 object-contain"
+               />
+               <h2 class="text-sm mt-5 md:mt-10 font-medium text-slate-500">No ${
+                  id > 10 ? id : `0${id}`
+               }</h2>
+               <h1 class="text-lg font-semibold text-slate-700">${name}</h1>
+               <div class="flex gap-3 justify-center mt-5" id="type${id}">
+   
+               </div>
+            </div>`;
+}

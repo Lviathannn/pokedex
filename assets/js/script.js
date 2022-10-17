@@ -1,15 +1,18 @@
 const cardContainer = document.getElementById("card-container");
 
-window.addEventListener("load", function () {
-   const total = 420;
-   for (let i = 387; i < total; i++) {
-      getPokemon(i);
-   }
+window.addEventListener("load", async function () {
+   await fetchPokemon();
 });
 
-function getPokemon(id) {
+async function fetchPokemon() {
+   const total = 450;
+   for (let i = 387; i < total; i++) {
+      await getPokemon(i);
+   }
+}
+async function getPokemon(id) {
    const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
-   fetch(url)
+   await fetch(url)
       .then((response) => response.json())
       .then((data) => generatePokemon(data));
 }
@@ -26,11 +29,11 @@ function generatePokemon(data) {
    makeType(pokeType, pokeID);
    const types = document.querySelectorAll(`.type${pokeID}`);
    types.forEach((type) => {
-      styleCard(type);
+      styleType(type);
    });
 }
 
-function styleCard(type) {
+function styleType(type) {
    type.innerHTML == "water"
       ? type.classList.add("bg-blue-400")
       : type.innerHTML == "fire"
@@ -83,14 +86,14 @@ function makeType(type, id) {
 }
 function makePokemon(id, name, img) {
    return `<div
-               class="w-[80%] sm:w-[25%] h-[200px] md:h-[250px] bg-white rounded-3xl shadow-md shadow-slate-300/50 flex flex-col items-center pb-10 px-2"
+               class="w-[80%] sm:w-[30%] h-[200px] md:h-[250px] bg-white rounded-3xl shadow-[0px_10px_20px_rgba(0,0,0,0.05)]  flex flex-col items-center pb-10 px-2 card${id}"  
             >
                <img
                   src=${img}
                   alt=""
                   class="w-16 h-16 sm:w-20 sm:h-20 -mt-12 object-contain"
                />
-               <h2 class="text-sm mt-5 md:mt-10 font-medium text-slate-500">No ${
+               <h2 class="text-sm mt-14 md:mt-24 font-medium text-slate-500">No ${
                   id > 10 ? id : `0${id}`
                }</h2>
                <h1 class="text-lg font-semibold text-slate-700">${name}</h1>

@@ -16,18 +16,34 @@
    </head>
    <body class="bg-slate-100" style="font-family: poppins">
       <nav
-         class="h-14 w-full bg-white shadow-sm flex items-center p-5 fixed z-20"
+         class="h-14 w-full bg-white shadow-[0px_10px_20px_rgba(0,0,0,0.05)] flex items-center p-5 fixed z-30"
       >
          <div class="flex gap-2 items-center">
             <img
                src="assets/img/pokeball.png"
                alt=""
-               class="w-10 object-cover"
+               class="w-8 object-cover"
             />
             <h1 class="text-lg font-medium text-slate-500">Pokedex</h1>
          </div>
       </nav>
-      <main class="pt-32 w-full">
+      <main class="pt-24 w-[90%] text-center m-auto">
+         <form
+            action=""
+            class="w-[85%] sm:w-[95%] lg:w-[93%] md:h-20 h-16 relative z-20 justify-center items-center flex m-auto mb-20 bg-white overflow-hidden rounded-xl"
+         >
+            <input
+               type="text"
+               class="w-[95%] h-full p-5 focus:outline-0"
+               placeholder="Search Pokemon . . ."
+            />
+            <button
+               type="Submit"
+               class="bg-[#FF5350] mr-3 p-1 rounded-xl hover:shadow-[5px_5px_25px_rgba(0,0,0,0.9)] hover:shadow-[#FFBBBF]"
+            >
+               <img src="assets/img/pokeball2.png" alt="" class="w-8" />
+            </button>
+         </form>
          <div
             class="absolute w-96 h-96 bg-slate-200 rounded-full flex justify-center items-center -top-20 -left-20"
          >
@@ -36,7 +52,7 @@
             ></div>
          </div>
          <div
-            class="container w-[95%] m-auto relative z-10 gap-y-14 flex flex-wrap items-center justify-center gap-x-5"
+            class="container w-full m-auto relative z-10 gap-y-14 flex flex-wrap items-center justify-center gap-x-5"
             id="card-container"
          ></div>
       </main>

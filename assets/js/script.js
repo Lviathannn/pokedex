@@ -1,4 +1,18 @@
 const cardContainer = document.getElementById("card-container");
+const inputForm = document.getElementById("input-form");
+
+inputForm.addEventListener("click", function (e) {
+   e.preventDefault();
+   const pokemons = document.getElementsByClassName("card");
+   const input = document.querySelector(".input").value;
+   for (const pokemon of pokemons) {
+      if (input == "") {
+         pokemon.classList.remove("hidden");
+      } else if (!pokemon.textContent.includes(input)) {
+         pokemon.classList.add("hidden");
+      }
+   }
+});
 
 window.addEventListener("load", async function () {
    await fetchPokemon();
@@ -86,7 +100,7 @@ function makeType(type, id) {
 }
 function makePokemon(id, name, img) {
    return `<div
-               class="w-[80%] sm:w-[30%] h-[200px] md:h-[250px] bg-white rounded-3xl shadow-[0px_10px_20px_rgba(0,0,0,0.05)]  flex flex-col items-center pb-10 px-2 card${id}"  
+               class="w-[80%] sm:w-[30%] h-[200px] md:h-[250px] bg-white rounded-3xl shadow-[0px_10px_20px_rgba(0,0,0,0.05)]  flex flex-col items-center pb-10 px-2 card card${id}"  
             >
                <img
                   src=${img}

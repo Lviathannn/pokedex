@@ -1,26 +1,20 @@
-const cardContainer = document.getElementById("card-container");
-const inputForm = document.getElementById("input-form");
-
-inputForm.addEventListener("click", function (e) {
-   e.preventDefault();
+function filterPokemon(data) {
    const pokemons = document.getElementsByClassName("card");
-   const input = document.querySelector(".input").value;
+   const input = data.toLowerCase();
+   console.log(input);
    for (const pokemon of pokemons) {
+      pokemon.classList.remove("hidden");
       if (input == "") {
          pokemon.classList.remove("hidden");
       } else if (!pokemon.textContent.includes(input)) {
          pokemon.classList.add("hidden");
       }
    }
-});
-
-window.addEventListener("load", async function () {
-   await fetchPokemon();
-});
+}
 
 async function fetchPokemon() {
-   const total = 450;
-   for (let i = 387; i < total; i++) {
+   const total = 100;
+   for (let i = 1; i < total; i++) {
       await getPokemon(i);
    }
 }
@@ -32,6 +26,7 @@ async function getPokemon(id) {
 }
 
 function generatePokemon(data) {
+   const cardContainer = document.getElementById("card-container");
    const pokeName = data.name;
    const pokeID = data.id;
    const pokeType = data.types;
@@ -91,7 +86,7 @@ function makeType(type, id) {
          "rounded-md",
          "text-white",
          "px-3",
-         "py-[1px]",
+         "py-[2px]",
          `type${id}`
       );
       span.innerHTML = element.type.name;
@@ -100,19 +95,46 @@ function makeType(type, id) {
 }
 function makePokemon(id, name, img) {
    return `<div
-               class="w-[80%] sm:w-[30%] h-[200px] md:h-[250px] bg-white rounded-3xl shadow-[0px_10px_20px_rgba(0,0,0,0.05)]  flex flex-col items-center pb-10 px-2 card card${id}"  
+      class="w-[80%] sm:w-[30%] h-[200px] md:h-[250px] bg-white rounded-3xl shadow-[0px_10px_20px_rgba(0,0,0,0.05)]  flex flex-col items-center pb-10 px-2 card card${id}"  
             >
-               <img
-                  src=${img}
-                  alt=""
+            <img
+            src=${img}
+            alt=""
                   class="w-16 h-16 sm:w-20 sm:h-20 -mt-12 object-contain"
-               />
-               <h2 class="text-sm mt-14 md:mt-24 font-medium text-slate-500">No ${
-                  id > 10 ? id : `0${id}`
-               }</h2>
-               <h1 class="text-lg font-semibold text-slate-700">${name}</h1>
-               <div class="flex gap-3 justify-center mt-5" id="type${id}">
-   
+                  />
+                  <h2 class="text-sm mt-14 md:mt-24 font-medium text-slate-500">No ${
+                     id > 10 ? id : `0${id}`
+                  }</h2>
+                  <h1 class="text-lg font-semibold text-slate-700">${name}</h1>
+                  <div class="flex gap-3 justify-center mt-5" id="type${id}">
+                  
                </div>
-            </div>`;
+               </div>`;
 }
+
+const searchForm = document.getElementById("input-form");
+const inputType = document.getElementById("input-type");
+const options = document.getElementsByClassName("option");
+for (const option of options) {
+   option.addEventListener("click", function () {
+      const data = option.dataset.pokemon;
+      filterPokemon(data);
+   });
+}
+
+inputType.addEventListener("click", function () {
+   const icon = document.getElementById("icon");
+   icon.classList.toggle("-rotate-90");
+   const dropdown = document.getElementById("dropdown");
+   dropdown.classList.toggle("hidden");
+});
+
+searchForm.addEventListener("click", function (e) {
+   e.preventDefault();
+   const input = document.querySelector(".input").value;
+   filterPokemon(input);
+});
+
+window.addEventListener("load", async function () {
+   await fetchPokemon();
+});
